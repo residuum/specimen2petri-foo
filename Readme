@@ -1,0 +1,8 @@
+XSL stylesheet for converting sample banks from specimen[0] format to
+the format used by its fork and designated successor petri-foo[1].
+
+Part of the conversion is possible right now, but the converted files
+are not yet loadable.
+
+[0] http://zhevny.com/specimen/
+[1] http://sourceforge.net/projects/petri-foo/

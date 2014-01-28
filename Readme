@@ -4,5 +4,11 @@ the format used by its fork and designated successor petri-foo[1].
 Part of the conversion is possible right now, but the converted files
 are not yet loadable.
 
+You will need a tool to transform the specimen XML to the new format,
+e. g. xsltproc[2] works for this:
+
+$ xsltproc specimen2petri-foo.xsl specimen_file > converted_file
+
 [0] http://zhevny.com/specimen/
 [1] http://sourceforge.net/projects/petri-foo/
+[2] http://xmlsoft.org/XSLT/xsltproc2.html

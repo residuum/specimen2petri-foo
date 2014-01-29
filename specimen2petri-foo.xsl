@@ -42,6 +42,31 @@
 							<xsl:attribute name="velocity_upper">127</xsl:attribute>
 						</xsl:element>
 					</xsl:element>
+					<xsl:element name="Amplitude">
+						<xsl:attribute name="level"><xsl:value-of select="volume"/></xsl:attribute>
+						<xsl:attribute name="velocity_sensing"><xsl:value-of select="volume_vel_amt"/></xsl:attribute>
+						<xsl:attribute name="key_tracking">0,000000</xsl:attribute>
+						<Mod1 source="CC 7 - Channel Volume" amount="1,000000"/>
+						<Mod2 source="OFF" amount="0,000000"/>
+						<Env source="EG1"/>
+					</xsl:element>
+					<xsl:element name="Pan">
+						<xsl:attribute name="level"><xsl:value-of select="pan"/></xsl:attribute>
+						<xsl:attribute name="velocity_sensing"><xsl:value-of select="panning_vel_amt"/></xsl:attribute>
+						<xsl:attribute name="key_tracking">0,000000</xsl:attribute>
+						<Mod1 source="CC 10 - Pan" amount="1,000000"/>
+						<Mod2 source="OFF" amount="0,000000"/>
+						<Mod3 source="OFF" amount="0,000000"/>
+					</xsl:element>
+					<xsl:element name="Pitch">
+						<xsl:attribute name="level"><xsl:value-of select="pitch"/></xsl:attribute>
+						<xsl:attribute name="tuning_range"><xsl:value-of select="pitch_steps"/></xsl:attribute>
+						<xsl:attribute name="velocity_sensing"><xsl:value-of select="pitch_vel_amt"/></xsl:attribute>
+						<xsl:attribute name="key_tracking">0,000000</xsl:attribute>
+						<Mod1 source="Pitch Wheel" amount="1,000000"/>
+						<Mod2 source="OFF" amount="0,000000"/>
+						<Mod3 source="OFF" amount="0,000000"/>
+					</xsl:element>
 				</xsl:element>
 			</xsl:for-each>
 		</Petri-Foo-Dish>

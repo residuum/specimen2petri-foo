@@ -9,26 +9,28 @@
 					<xsl:attribute name="name">
 						<xsl:value-of select="name"/>
 					</xsl:attribute>
-					<xsl:attribute name="mode">
-						<xsl:choose>
-							<xsl:when test="floor(play_mode div 32) &gt; 0">pingpong</xsl:when>
-							<xsl:when test="floor(play_mode div 16) &gt; 0">loop</xsl:when>
-							<xsl:when test="floor(play_mode div 8) &gt; 0">trim</xsl:when>
-							<xsl:when test="floor(play_mode div 4) &gt; 0">singleshot</xsl:when>
-						</xsl:choose>
-					</xsl:attribute>
-					<xsl:attribute name="reverse">
-						<xsl:choose>
-							<xsl:when test="play_mode mod 2 = 1">false</xsl:when>
-							<xsl:otherwise>true</xsl:otherwise>
-						</xsl:choose>
-					</xsl:attribute>
-					<xsl:attribute name="to_end">false</xsl:attribute>
 					<xsl:element name="Sample">
+						<xsl:attribute name="mode">
+							<xsl:choose>
+								<xsl:when test="floor(play_mode div 32) &gt; 0">pingpong</xsl:when>
+								<xsl:when test="floor(play_mode div 16) &gt; 0">loop</xsl:when>
+								<xsl:when test="floor(play_mode div 8) &gt; 0">trim</xsl:when>
+								<xsl:when test="floor(play_mode div 4) &gt; 0">singleshot</xsl:when>
+							</xsl:choose>
+						</xsl:attribute>
+						<xsl:attribute name="reverse">
+							<xsl:choose>
+								<xsl:when test="play_mode mod 2 = 1">false</xsl:when>
+								<xsl:otherwise>true</xsl:otherwise>
+							</xsl:choose>
+						</xsl:attribute>
+						<xsl:attribute name="to_end">false</xsl:attribute>
 						<xsl:attribute name="file"><xsl:value-of select="file"/></xsl:attribute>
-						<xsl:attribute name="start"><xsl:value-of select="sample_start"/></xsl:attribute>
-						<xsl:attribute name="stop"><xsl:value-of select="sample_stop"/></xsl:attribute>
-						<xsl:attribute name="fade_samples">100</xsl:attribute>
+						<xsl:element name="Play">
+							<xsl:attribute name="start"><xsl:value-of select="sample_start"/></xsl:attribute>
+							<xsl:attribute name="stop"><xsl:value-of select="sample_stop"/></xsl:attribute>
+							<xsl:attribute name="fade_samples">100</xsl:attribute>
+						</xsl:element>
 						<xsl:element name="Loop">
 							<xsl:attribute name="start"><xsl:value-of select="loop_start"/></xsl:attribute>
 							<xsl:attribute name="stop"><xsl:value-of select="loop_stop"/></xsl:attribute>

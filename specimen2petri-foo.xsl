@@ -50,7 +50,14 @@
 						<xsl:attribute name="key_tracking">0,000000</xsl:attribute>
 						<Mod1 source="CC 7 - Channel Volume" amount="1,000000"/>
 						<Mod2 source="OFF" amount="0,000000"/>
-						<Env source="EG1"/>
+						<xsl:choose>
+							<xsl:when test="volume_env_on = 'yes'">
+								<Env source="EG1"/>
+							</xsl:when>
+							<xsl:otherwise>
+								<Env source="OFF"/>
+							</xsl:otherwise>
+						</xsl:choose>
 					</xsl:element>
 					<xsl:element name="Pan">
 						<xsl:attribute name="level"><xsl:value-of select="pan"/></xsl:attribute>
@@ -82,15 +89,29 @@
 						</Resonance>
 					</Lowpass>
 					<Voice cut="0" cut_by="0" monophonic="false">
-						<Portamento active="true">
+						<xsl:element name="Portamento">
+							<xsl:attribute name="active">
+								<xsl:choose>
+									<xsl:when test="portamento = 'yes'">true</xsl:when>
+									<xsl:otherwise>false</xsl:otherwise>
+								</xsl:choose>
+							</xsl:attribute>
 							<Mod source="CC 65 - Portamento On/Off" threshold="0,500000"/>
-						</Portamento>
-						<Portamento_time value="0,050000">
+						</xsl:element>
+						<xsl:element name="Portamento_time">
+							<xsl:attribute name="value"><xsl:value-of select="portamento_time"/>
+							</xsl:attribute>
 							<Mod source="CC 5 - Portamento Time" amount="1,000000"/>
-						</Portamento_time>
-						<Legato active="true">
+						</xsl:element>
+						<xsl:element name="Legato">
+							<xsl:attribute name="active">
+								<xsl:choose>
+									<xsl:when test="legato = 'yes'">true</xsl:when>
+									<xsl:otherwise>false</xsl:otherwise>
+								</xsl:choose>
+							</xsl:attribute>
 							<Mod source="CC 68 - Legato On/Off" threshold="0,500000"/>
-						</Legato>
+						</xsl:element>
 					</Voice>
 					<EG1 active="true" delay="0,000000" attack="0,005000" hold="0,000000" decay="0,000000" sustain="1,000000" release="0,375000" key_tracking="-0,990000"/>
 					<EG2 active="false" delay="0,000000" attack="0,005000" hold="0,000000" decay="0,000000" sustain="1,000000" release="0,025000" key_tracking="0,000000"/>

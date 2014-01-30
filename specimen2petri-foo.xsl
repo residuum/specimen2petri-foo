@@ -113,11 +113,81 @@
 							<Mod source="CC 68 - Legato On/Off" threshold="0,500000"/>
 						</xsl:element>
 					</Voice>
-					<EG1 active="true" delay="0,000000" attack="0,005000" hold="0,000000" decay="0,000000" sustain="1,000000" release="0,375000" key_tracking="-0,990000"/>
-					<EG2 active="false" delay="0,000000" attack="0,005000" hold="0,000000" decay="0,000000" sustain="1,000000" release="0,025000" key_tracking="0,000000"/>
-					<EG3 active="false" delay="0,000000" attack="0,005000" hold="0,000000" decay="0,000000" sustain="1,000000" release="0,025000" key_tracking="0,000000"/>
-					<EG4 active="false" delay="0,000000" attack="0,005000" hold="0,000000" decay="0,000000" sustain="1,000000" release="0,025000" key_tracking="0,000000"/>
-					<EG5 active="false" delay="0,000000" attack="0,005000" hold="0,000000" decay="0,000000" sustain="1,000000" release="0,025000" key_tracking="0,000000"/>
+					<xsl:element name="EG1">
+						<xsl:attribute name="active">
+							<xsl:choose>
+								<xsl:when test="volume_env_on = 'yes'">true</xsl:when>
+								<xsl:otherwise>false</xsl:otherwise>
+							</xsl:choose>
+						</xsl:attribute>
+						<xsl:attribute name="delay"><xsl:value-of select="volume_delay" /></xsl:attribute>
+						<xsl:attribute name="attack"><xsl:value-of select="volume_a" /></xsl:attribute>
+						<xsl:attribute name="hold"><xsl:value-of select="volume_hold" /></xsl:attribute>
+						<xsl:attribute name="decay"><xsl:value-of select="volume_d" /></xsl:attribute>
+						<xsl:attribute name="sustain"><xsl:value-of select="volume_s" /></xsl:attribute>
+						<xsl:attribute name="release"><xsl:value-of select="volume_r" /></xsl:attribute>
+						<xsl:attribute name="key_tracking">-0,990000</xsl:attribute>
+					</xsl:element>
+					<xsl:element name="EG2">
+						<xsl:attribute name="active">
+							<xsl:choose>
+								<xsl:when test="panning_env_on = 'yes'">true</xsl:when>
+								<xsl:otherwise>false</xsl:otherwise>
+							</xsl:choose>
+						</xsl:attribute>
+						<xsl:attribute name="delay"><xsl:value-of select="panning_delay" /></xsl:attribute>
+						<xsl:attribute name="attack"><xsl:value-of select="panning_a" /></xsl:attribute>
+						<xsl:attribute name="hold"><xsl:value-of select="panning_hold" /></xsl:attribute>
+						<xsl:attribute name="decay"><xsl:value-of select="panning_d" /></xsl:attribute>
+						<xsl:attribute name="sustain"><xsl:value-of select="panning_s" /></xsl:attribute>
+						<xsl:attribute name="release"><xsl:value-of select="panning_r" /></xsl:attribute>
+						<xsl:attribute name="key_tracking">0,000000</xsl:attribute>
+					</xsl:element>
+					<xsl:element name="EG3">
+						<xsl:attribute name="active">
+							<xsl:choose>
+								<xsl:when test="cutoff_env_on = 'yes'">true</xsl:when>
+								<xsl:otherwise>false</xsl:otherwise>
+							</xsl:choose>
+						</xsl:attribute>
+						<xsl:attribute name="delay"><xsl:value-of select="cutoff_delay" /></xsl:attribute>
+						<xsl:attribute name="attack"><xsl:value-of select="cutoff_a" /></xsl:attribute>
+						<xsl:attribute name="hold"><xsl:value-of select="cutoff_hold" /></xsl:attribute>
+						<xsl:attribute name="decay"><xsl:value-of select="cutoff_d" /></xsl:attribute>
+						<xsl:attribute name="sustain"><xsl:value-of select="cutoff_s" /></xsl:attribute>
+						<xsl:attribute name="release"><xsl:value-of select="cutoff_r" /></xsl:attribute>
+						<xsl:attribute name="key_tracking">0,000000</xsl:attribute>
+					</xsl:element>
+					<xsl:element name="EG4">
+						<xsl:attribute name="active">
+							<xsl:choose>
+								<xsl:when test="resonance_env_on = 'yes'">true</xsl:when>
+								<xsl:otherwise>false</xsl:otherwise>
+							</xsl:choose>
+						</xsl:attribute>
+						<xsl:attribute name="delay"><xsl:value-of select="resonance_delay" /></xsl:attribute>
+						<xsl:attribute name="attack"><xsl:value-of select="resonance_a" /></xsl:attribute>
+						<xsl:attribute name="hold"><xsl:value-of select="resonance_hold" /></xsl:attribute>
+						<xsl:attribute name="decay"><xsl:value-of select="resonance_d" /></xsl:attribute>
+						<xsl:attribute name="sustain"><xsl:value-of select="resonance_s" /></xsl:attribute>
+						<xsl:attribute name="release"><xsl:value-of select="resonance_r" /></xsl:attribute>
+						<xsl:attribute name="key_tracking">0,000000</xsl:attribute>
+					</xsl:element>
+					<xsl:element name="EG5">
+						<xsl:attribute name="active">
+							<xsl:choose>
+								<xsl:when test="pitch_env_on = 'yes'">true</xsl:when>
+								<xsl:otherwise>false</xsl:otherwise>
+							</xsl:choose>
+						</xsl:attribute>
+						<xsl:attribute name="delay"><xsl:value-of select="pitch_delay" /></xsl:attribute>
+						<xsl:attribute name="attack"><xsl:value-of select="pitch_a" /></xsl:attribute>
+						<xsl:attribute name="hold"><xsl:value-of select="pitch_hold" /></xsl:attribute>
+						<xsl:attribute name="decay"><xsl:value-of select="pitch_d" /></xsl:attribute>
+						<xsl:attribute name="sustain"><xsl:value-of select="pitch_s" /></xsl:attribute>
+						<xsl:attribute name="release"><xsl:value-of select="pitch_r" /></xsl:attribute>
+						<xsl:attribute name="key_tracking">0,000000</xsl:attribute>
+					</xsl:element>
 					<VLFO1 active="true">
 						<Frequency hrtz="9,000000" beats="1,000000" sync="false">
 							<Mod1 source="OFF" amount="0,000000"/>

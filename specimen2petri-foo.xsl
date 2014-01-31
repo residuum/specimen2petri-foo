@@ -126,7 +126,7 @@
 						<xsl:attribute name="decay"><xsl:value-of select="volume_d" /></xsl:attribute>
 						<xsl:attribute name="sustain"><xsl:value-of select="volume_s" /></xsl:attribute>
 						<xsl:attribute name="release"><xsl:value-of select="volume_r" /></xsl:attribute>
-						<xsl:attribute name="key_tracking">-0,990000</xsl:attribute>
+						<xsl:attribute name="key_tracking"><xsl:value-of select="volume_amt" /></xsl:attribute>
 					</xsl:element>
 					<xsl:element name="EG2">
 						<xsl:attribute name="active">
@@ -141,7 +141,7 @@
 						<xsl:attribute name="decay"><xsl:value-of select="panning_d" /></xsl:attribute>
 						<xsl:attribute name="sustain"><xsl:value-of select="panning_s" /></xsl:attribute>
 						<xsl:attribute name="release"><xsl:value-of select="panning_r" /></xsl:attribute>
-						<xsl:attribute name="key_tracking">0,000000</xsl:attribute>
+						<xsl:attribute name="key_tracking"><xsl:value-of select="panning_amt" /></xsl:attribute>
 					</xsl:element>
 					<xsl:element name="EG3">
 						<xsl:attribute name="active">
@@ -156,7 +156,7 @@
 						<xsl:attribute name="decay"><xsl:value-of select="cutoff_d" /></xsl:attribute>
 						<xsl:attribute name="sustain"><xsl:value-of select="cutoff_s" /></xsl:attribute>
 						<xsl:attribute name="release"><xsl:value-of select="cutoff_r" /></xsl:attribute>
-						<xsl:attribute name="key_tracking">0,000000</xsl:attribute>
+						<xsl:attribute name="key_tracking"><xsl:value-of select="cutoff_amt" /></xsl:attribute>
 					</xsl:element>
 					<xsl:element name="EG4">
 						<xsl:attribute name="active">
@@ -171,7 +171,7 @@
 						<xsl:attribute name="decay"><xsl:value-of select="resonance_d" /></xsl:attribute>
 						<xsl:attribute name="sustain"><xsl:value-of select="resonance_s" /></xsl:attribute>
 						<xsl:attribute name="release"><xsl:value-of select="resonance_r" /></xsl:attribute>
-						<xsl:attribute name="key_tracking">0,000000</xsl:attribute>
+						<xsl:attribute name="key_tracking"><xsl:value-of select="resonance_amt" /></xsl:attribute>
 					</xsl:element>
 					<xsl:element name="EG5">
 						<xsl:attribute name="active">
@@ -186,7 +186,7 @@
 						<xsl:attribute name="decay"><xsl:value-of select="pitch_d" /></xsl:attribute>
 						<xsl:attribute name="sustain"><xsl:value-of select="pitch_s" /></xsl:attribute>
 						<xsl:attribute name="release"><xsl:value-of select="pitch_r" /></xsl:attribute>
-						<xsl:attribute name="key_tracking">0,000000</xsl:attribute>
+						<xsl:attribute name="key_tracking"><xsl:value-of select="pitch_amt" /></xsl:attribute>
 					</xsl:element>
 					<VLFO1 active="true">
 						<Frequency hrtz="9,000000" beats="1,000000" sync="false">

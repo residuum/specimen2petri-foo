@@ -49,7 +49,15 @@
 						<xsl:attribute name="velocity_sensing"><xsl:value-of select="volume_vel_amt"/></xsl:attribute>
 						<xsl:attribute name="key_tracking">0,000000</xsl:attribute>
 						<Mod1 source="CC 7 - Channel Volume" amount="1,000000"/>
-						<Mod2 source="OFF" amount="0,000000"/>
+						<xsl:element name="Mod2">
+							<xsl:attribute name="source">
+								<xsl:choose>
+									<xsl:when test="volume_lfo_on = 'yes'">VLFO1</xsl:when>
+									<xsl:otherwise>OFF</xsl:otherwise>
+								</xsl:choose>
+							</xsl:attribute>
+							<xsl:attribute name="amount"><xsl:value-of select="volume_lfo_amt"/></xsl:attribute>
+						</xsl:element>
 						<xsl:choose>
 							<xsl:when test="volume_env_on = 'yes'">
 								<Env source="EG1"/>
@@ -64,7 +72,15 @@
 						<xsl:attribute name="velocity_sensing"><xsl:value-of select="panning_vel_amt"/></xsl:attribute>
 						<xsl:attribute name="key_tracking">0,000000</xsl:attribute>
 						<Mod1 source="CC 10 - Pan" amount="1,000000"/>
-						<Mod2 source="OFF" amount="0,000000"/>
+						<xsl:element name="Mod2">
+							<xsl:attribute name="source">
+								<xsl:choose>
+									<xsl:when test="panning_lfo_on = 'yes'">VLFO2</xsl:when>
+									<xsl:otherwise>OFF</xsl:otherwise>
+								</xsl:choose>
+							</xsl:attribute>
+							<xsl:attribute name="amount"><xsl:value-of select="panning_lfo_amt"/></xsl:attribute>
+						</xsl:element>
 						<Mod3 source="OFF" amount="0,000000"/>
 					</xsl:element>
 					<xsl:element name="Pitch">
@@ -73,18 +89,42 @@
 						<xsl:attribute name="velocity_sensing"><xsl:value-of select="pitch_vel_amt"/></xsl:attribute>
 						<xsl:attribute name="key_tracking">0,000000</xsl:attribute>
 						<Mod1 source="Pitch Wheel" amount="1,000000"/>
-						<Mod2 source="OFF" amount="0,000000"/>
+						<xsl:element name="Mod2">
+							<xsl:attribute name="source">
+								<xsl:choose>
+									<xsl:when test="pitch_lfo_on = 'yes'">VLFO5</xsl:when>
+									<xsl:otherwise>OFF</xsl:otherwise>
+								</xsl:choose>
+							</xsl:attribute>
+							<xsl:attribute name="amount"><xsl:value-of select="pitch_lfo_amt"/></xsl:attribute>
+						</xsl:element>
 						<Mod3 source="OFF" amount="0,000000"/>
 					</xsl:element>
 					<Lowpass>
 						<Cutoff value="0,500000" velocity_sensing="0,000000" key_tracking="0,000000">
 							<Mod1 source="CC 74 - Brightness" amount="1,000000"/>
-							<Mod2 source="OFF" amount="0,000000"/>
+							<xsl:element name="Mod2">
+								<xsl:attribute name="source">
+									<xsl:choose>
+										<xsl:when test="cutoff_lfo_on = 'yes'">VLFO3</xsl:when>
+										<xsl:otherwise>OFF</xsl:otherwise>
+									</xsl:choose>
+								</xsl:attribute>
+								<xsl:attribute name="amount"><xsl:value-of select="cutoff_lfo_amt"/></xsl:attribute>
+							</xsl:element>
 							<Mod3 source="OFF" amount="0,000000"/>
 						</Cutoff>
 						<Resonance amount="0,000000" velocity_sensing="0,000000" key_tracking="0,000000">
 							<Mod1 source="CC 71 - Timbre" amount="0,975000"/>
-							<Mod2 source="OFF" amount="0,000000"/>
+							<xsl:element name="Mod2">
+								<xsl:attribute name="source">
+									<xsl:choose>
+										<xsl:when test="resonance_lfo_on = 'yes'">VLFO4</xsl:when>
+										<xsl:otherwise>OFF</xsl:otherwise>
+									</xsl:choose>
+								</xsl:attribute>
+								<xsl:attribute name="amount"><xsl:value-of select="resonance_lfo_amt"/></xsl:attribute>
+							</xsl:element>
 							<Mod3 source="OFF" amount="0,000000"/>
 						</Resonance>
 					</Lowpass>
@@ -188,56 +228,151 @@
 						<xsl:attribute name="release"><xsl:value-of select="pitch_r" /></xsl:attribute>
 						<xsl:attribute name="key_tracking"><xsl:value-of select="pitch_amt" /></xsl:attribute>
 					</xsl:element>
-					<VLFO1 active="true">
-						<Frequency hrtz="9,000000" beats="1,000000" sync="false">
-							<Mod1 source="OFF" amount="0,000000"/>
-							<Mod2 source="OFF" amount="0,000000"/>
-						</Frequency>
-						<Amplitude shape="Sine" positive="false" delay="0,000000" attack="0,000000">
+					<xsl:element name="VLFO1">
+						<xsl:attribute name="active">
+							<xsl:choose>
+								<xsl:when test="volume_lfo_on = 'yes'">true</xsl:when>
+								<xsl:otherwise>false</xsl:otherwise>
+							</xsl:choose>
+						</xsl:attribute>
+						<xsl:element name="Frequency">
+							<xsl:attribute name="hrtz"><xsl:value-of select="volume_lfo_freq"/></xsl:attribute>
+							<xsl:attribute name="beats"><xsl:value-of select="volume_lfo_beats"/></xsl:attribute>
+							<xsl:attribute name="sync">
+								<xsl:choose>
+									<xsl:when test="volume_lfo_sync = 'yes'">true</xsl:when>
+									<xsl:otherwise>false</xsl:otherwise>
+								</xsl:choose>
+							</xsl:attribute>
+						</xsl:element>
+						<xsl:element name="Amplitude">
+							<xsl:attribute name="shape"><xsl:value-of select="volume_lfo_shape"/></xsl:attribute>
+							<xsl:attribute name="positive">
+								<xsl:choose>
+									<xsl:when test="volume_lfo_positive = 'yes'">true</xsl:when>
+									<xsl:otherwise>false</xsl:otherwise>
+								</xsl:choose>
+							</xsl:attribute>
 							<Mod1 source="CC 1 - Mod Wheel" amount="1,000000"/>
 							<Mod2 source="OFF" amount="0,000000"/>
-						</Amplitude>
-					</VLFO1>
-					<VLFO2 active="false">
-						<Frequency hrtz="1,000000" beats="1,000000" sync="false">
+						</xsl:element>
+					</xsl:element>
+					<xsl:element name="VLFO2">
+						<xsl:attribute name="active">
+							<xsl:choose>
+								<xsl:when test="panning_lfo_on = 'yes'">true</xsl:when>
+								<xsl:otherwise>false</xsl:otherwise>
+							</xsl:choose>
+						</xsl:attribute>
+						<xsl:element name="Frequency">
+							<xsl:attribute name="hrtz"><xsl:value-of select="panning_lfo_freq"/></xsl:attribute>
+							<xsl:attribute name="beats"><xsl:value-of select="panning_lfo_beats"/></xsl:attribute>
+							<xsl:attribute name="sync">
+								<xsl:choose>
+									<xsl:when test="panning_lfo_sync = 'yes'">true</xsl:when>
+									<xsl:otherwise>false</xsl:otherwise>
+								</xsl:choose>
+							</xsl:attribute>
+						</xsl:element>
+						<xsl:element name="Amplitude">
+							<xsl:attribute name="shape"><xsl:value-of select="panning_lfo_shape"/></xsl:attribute>
+							<xsl:attribute name="positive">
+								<xsl:choose>
+									<xsl:when test="panning_lfo_positive = 'yes'">true</xsl:when>
+									<xsl:otherwise>false</xsl:otherwise>
+								</xsl:choose>
+							</xsl:attribute>
 							<Mod1 source="OFF" amount="0,000000"/>
 							<Mod2 source="OFF" amount="0,000000"/>
-						</Frequency>
-						<Amplitude shape="Sine" positive="false" delay="0,000000" attack="0,000000">
+						</xsl:element>
+					</xsl:element>
+					<xsl:element name="VLFO3">
+						<xsl:attribute name="active">
+							<xsl:choose>
+								<xsl:when test="cutoff_lfo_on = 'yes'">true</xsl:when>
+								<xsl:otherwise>false</xsl:otherwise>
+							</xsl:choose>
+						</xsl:attribute>
+						<xsl:element name="Frequency">
+							<xsl:attribute name="hrtz"><xsl:value-of select="cutoff_lfo_freq"/></xsl:attribute>
+							<xsl:attribute name="beats"><xsl:value-of select="cutoff_lfo_beats"/></xsl:attribute>
+							<xsl:attribute name="sync">
+								<xsl:choose>
+									<xsl:when test="cutoff_lfo_sync = 'yes'">true</xsl:when>
+									<xsl:otherwise>false</xsl:otherwise>
+								</xsl:choose>
+							</xsl:attribute>
+						</xsl:element>
+						<xsl:element name="Amplitude">
+							<xsl:attribute name="shape"><xsl:value-of select="cutoff_lfo_shape"/></xsl:attribute>
+							<xsl:attribute name="positive">
+								<xsl:choose>
+									<xsl:when test="cutoff_lfo_positive = 'yes'">true</xsl:when>
+									<xsl:otherwise>false</xsl:otherwise>
+								</xsl:choose>
+							</xsl:attribute>
 							<Mod1 source="OFF" amount="0,000000"/>
 							<Mod2 source="OFF" amount="0,000000"/>
-						</Amplitude>
-					</VLFO2>
-					<VLFO3 active="false">
-						<Frequency hrtz="1,000000" beats="1,000000" sync="false">
+						</xsl:element>
+					</xsl:element>
+					<xsl:element name="VLFO4">
+						<xsl:attribute name="active">
+							<xsl:choose>
+								<xsl:when test="resonance_lfo_on = 'yes'">true</xsl:when>
+								<xsl:otherwise>false</xsl:otherwise>
+							</xsl:choose>
+						</xsl:attribute>
+						<xsl:element name="Frequency">
+							<xsl:attribute name="hrtz"><xsl:value-of select="resonance_lfo_freq"/></xsl:attribute>
+							<xsl:attribute name="beats"><xsl:value-of select="resonance_lfo_beats"/></xsl:attribute>
+							<xsl:attribute name="sync">
+								<xsl:choose>
+									<xsl:when test="resonance_lfo_sync = 'yes'">true</xsl:when>
+									<xsl:otherwise>false</xsl:otherwise>
+								</xsl:choose>
+							</xsl:attribute>
+						</xsl:element>
+						<xsl:element name="Amplitude">
+							<xsl:attribute name="shape"><xsl:value-of select="resonance_lfo_shape"/></xsl:attribute>
+							<xsl:attribute name="positive">
+								<xsl:choose>
+									<xsl:when test="resonance_lfo_positive = 'yes'">true</xsl:when>
+									<xsl:otherwise>false</xsl:otherwise>
+								</xsl:choose>
+							</xsl:attribute>
 							<Mod1 source="OFF" amount="0,000000"/>
 							<Mod2 source="OFF" amount="0,000000"/>
-						</Frequency>
-						<Amplitude shape="Sine" positive="false" delay="0,000000" attack="0,000000">
+						</xsl:element>
+					</xsl:element>
+					<xsl:element name="VLFO5">
+						<xsl:attribute name="active">
+							<xsl:choose>
+								<xsl:when test="pitch_lfo_on = 'yes'">true</xsl:when>
+								<xsl:otherwise>false</xsl:otherwise>
+							</xsl:choose>
+						</xsl:attribute>
+						<xsl:element name="Frequency">
+							<xsl:attribute name="hrtz"><xsl:value-of select="pitch_lfo_freq"/></xsl:attribute>
+							<xsl:attribute name="beats"><xsl:value-of select="pitch_lfo_beats"/></xsl:attribute>
+							<xsl:attribute name="sync">
+								<xsl:choose>
+									<xsl:when test="pitch_lfo_sync = 'yes'">true</xsl:when>
+									<xsl:otherwise>false</xsl:otherwise>
+								</xsl:choose>
+							</xsl:attribute>
+						</xsl:element>
+						<xsl:element name="Amplitude">
+							<xsl:attribute name="shape"><xsl:value-of select="pitch_lfo_shape"/></xsl:attribute>
+							<xsl:attribute name="positive">
+								<xsl:choose>
+									<xsl:when test="pitch_lfo_positive = 'yes'">true</xsl:when>
+									<xsl:otherwise>false</xsl:otherwise>
+								</xsl:choose>
+							</xsl:attribute>
 							<Mod1 source="OFF" amount="0,000000"/>
 							<Mod2 source="OFF" amount="0,000000"/>
-						</Amplitude>
-					</VLFO3>
-					<VLFO4 active="false">
-						<Frequency hrtz="1,000000" beats="1,000000" sync="false">
-							<Mod1 source="OFF" amount="0,000000"/>
-							<Mod2 source="OFF" amount="0,000000"/>
-						</Frequency>
-						<Amplitude shape="Sine" positive="false" delay="0,000000" attack="0,000000">
-							<Mod1 source="OFF" amount="0,000000"/>
-							<Mod2 source="OFF" amount="0,000000"/>
-						</Amplitude>
-					</VLFO4>
-					<VLFO5 active="false">
-						<Frequency hrtz="1,000000" beats="1,000000" sync="false">
-							<Mod1 source="OFF" amount="0,000000"/>
-							<Mod2 source="OFF" amount="0,000000"/>
-						</Frequency>
-						<Amplitude shape="Sine" positive="false" delay="0,000000" attack="0,000000">
-							<Mod1 source="OFF" amount="0,000000"/>
-							<Mod2 source="OFF" amount="0,000000"/>
-						</Amplitude>
-					</VLFO5>
+						</xsl:element>
+					</xsl:element>
 					<GLFO1 active="false">
 						<Frequency hrtz="1,000000" beats="1,000000" sync="false">
 							<Mod1 source="OFF" amount="0,000000"/>

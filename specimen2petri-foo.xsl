@@ -101,7 +101,10 @@
 						<Mod3 source="OFF" amount="0,000000"/>
 					</xsl:element>
 					<Lowpass>
-						<Cutoff value="0,500000" velocity_sensing="0,000000" key_tracking="0,000000">
+						<xsl:element name="Cutoff">
+							<xsl:attribute name="value"><xsl:value-of select="cutoff"/></xsl:attribute>
+							<xsl:attribute name="velocity_sensing"><xsl:value-of select="cutoff_vel_amt"/></xsl:attribute>
+							<xsl:attribute name="key_tracking">0,000000</xsl:attribute>
 							<Mod1 source="CC 74 - Brightness" amount="1,000000"/>
 							<xsl:element name="Mod2">
 								<xsl:attribute name="source">
@@ -113,8 +116,11 @@
 								<xsl:attribute name="amount"><xsl:value-of select="cutoff_lfo_amt"/></xsl:attribute>
 							</xsl:element>
 							<Mod3 source="OFF" amount="0,000000"/>
-						</Cutoff>
-						<Resonance amount="0,000000" velocity_sensing="0,000000" key_tracking="0,000000">
+						</xsl:element>
+						<xsl:element name="Resonance">
+							<xsl:attribute name="value"><xsl:value-of select="resonance"/></xsl:attribute>
+							<xsl:attribute name="velocity_sensing"><xsl:value-of select="resonance_vel_amt"/></xsl:attribute>
+							<xsl:attribute name="key_tracking">0,000000</xsl:attribute>
 							<Mod1 source="CC 71 - Timbre" amount="0,975000"/>
 							<xsl:element name="Mod2">
 								<xsl:attribute name="source">
@@ -126,7 +132,7 @@
 								<xsl:attribute name="amount"><xsl:value-of select="resonance_lfo_amt"/></xsl:attribute>
 							</xsl:element>
 							<Mod3 source="OFF" amount="0,000000"/>
-						</Resonance>
+						</xsl:element>
 					</Lowpass>
 					<Voice cut="0" cut_by="0" monophonic="false">
 						<xsl:element name="Portamento">

@@ -7,9 +7,6 @@ on whether your locale settings uses comma or dot as decimal separator:
 s2p_comma.xsl
 s2p_dot.xsl
 
-Part of the conversion is possible right now, but the converted files
-are not yet loadable.
-
 You will need a tool to transform the specimen XML to the new format,
 e. g. xsltproc[2] works for this:
 

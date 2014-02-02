@@ -75,13 +75,21 @@
 						<xsl:element name="Mod2">
 							<xsl:attribute name="source">
 								<xsl:choose>
+									<xsl:when test="panning_env_on = 'yes'">EG2</xsl:when>
+									<xsl:otherwise>OFF</xsl:otherwise>
+								</xsl:choose>
+							</xsl:attribute>
+							<xsl:attribute name="amount"><xsl:value-of select="panning_env_amt"/></xsl:attribute>
+						</xsl:element>
+						<xsl:element name="Mod3">
+							<xsl:attribute name="source">
+								<xsl:choose>
 									<xsl:when test="panning_lfo_on = 'yes'">VLFO2</xsl:when>
 									<xsl:otherwise>OFF</xsl:otherwise>
 								</xsl:choose>
 							</xsl:attribute>
 							<xsl:attribute name="amount"><xsl:value-of select="panning_lfo_amt"/></xsl:attribute>
 						</xsl:element>
-						<Mod3 source="OFF" amount="0,000000"/>
 					</xsl:element>
 					<xsl:element name="Pitch">
 						<xsl:attribute name="level"><xsl:value-of select="pitch"/></xsl:attribute>
@@ -92,13 +100,21 @@
 						<xsl:element name="Mod2">
 							<xsl:attribute name="source">
 								<xsl:choose>
+									<xsl:when test="pitch_env_on = 'yes'">EG5</xsl:when>
+									<xsl:otherwise>OFF</xsl:otherwise>
+								</xsl:choose>
+							</xsl:attribute>
+							<xsl:attribute name="amount"><xsl:value-of select="pitch_env_amt"/></xsl:attribute>
+						</xsl:element>
+						<xsl:element name="Mod3">
+							<xsl:attribute name="source">
+								<xsl:choose>
 									<xsl:when test="pitch_lfo_on = 'yes'">VLFO5</xsl:when>
 									<xsl:otherwise>OFF</xsl:otherwise>
 								</xsl:choose>
 							</xsl:attribute>
 							<xsl:attribute name="amount"><xsl:value-of select="pitch_lfo_amt"/></xsl:attribute>
 						</xsl:element>
-						<Mod3 source="OFF" amount="0,000000"/>
 					</xsl:element>
 					<Lowpass>
 						<xsl:element name="Cutoff">
@@ -109,13 +125,21 @@
 							<xsl:element name="Mod2">
 								<xsl:attribute name="source">
 									<xsl:choose>
+										<xsl:when test="cutoff_env_on = 'yes'">EG3</xsl:when>
+										<xsl:otherwise>OFF</xsl:otherwise>
+									</xsl:choose>
+								</xsl:attribute>
+								<xsl:attribute name="amount"><xsl:value-of select="cutoff_env_amt"/></xsl:attribute>
+							</xsl:element>
+							<xsl:element name="Mod3">
+								<xsl:attribute name="source">
+									<xsl:choose>
 										<xsl:when test="cutoff_lfo_on = 'yes'">VLFO3</xsl:when>
 										<xsl:otherwise>OFF</xsl:otherwise>
 									</xsl:choose>
 								</xsl:attribute>
 								<xsl:attribute name="amount"><xsl:value-of select="cutoff_lfo_amt"/></xsl:attribute>
 							</xsl:element>
-							<Mod3 source="OFF" amount="0,000000"/>
 						</xsl:element>
 						<xsl:element name="Resonance">
 							<xsl:attribute name="value"><xsl:value-of select="resonance"/></xsl:attribute>
@@ -125,13 +149,21 @@
 							<xsl:element name="Mod2">
 								<xsl:attribute name="source">
 									<xsl:choose>
+										<xsl:when test="resonance_env_on = 'yes'">EG4</xsl:when>
+										<xsl:otherwise>OFF</xsl:otherwise>
+									</xsl:choose>
+								</xsl:attribute>
+								<xsl:attribute name="amount"><xsl:value-of select="resonance_env_amt"/></xsl:attribute>
+							</xsl:element>
+							<xsl:element name="Mod3">
+								<xsl:attribute name="source">
+									<xsl:choose>
 										<xsl:when test="resonance_lfo_on = 'yes'">VLFO4</xsl:when>
 										<xsl:otherwise>OFF</xsl:otherwise>
 									</xsl:choose>
 								</xsl:attribute>
 								<xsl:attribute name="amount"><xsl:value-of select="resonance_lfo_amt"/></xsl:attribute>
 							</xsl:element>
-							<Mod3 source="OFF" amount="0,000000"/>
 						</xsl:element>
 					</Lowpass>
 					<xsl:element name="Voice">

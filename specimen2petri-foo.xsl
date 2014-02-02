@@ -134,7 +134,15 @@
 							<Mod3 source="OFF" amount="0,000000"/>
 						</xsl:element>
 					</Lowpass>
-					<Voice cut="0" cut_by="0" monophonic="false">
+					<xsl:element name="Voice">
+						<xsl:attribute name="cut"><xsl:value-of select="cut"/></xsl:attribute>
+						<xsl:attribute name="cut_by"><xsl:value-of select="cut_by"/></xsl:attribute>
+						<xsl:attribute name="monophonic">
+							<xsl:choose>
+								<xsl:when test="monophonic = 'yes'">true</xsl:when>
+								<xsl:otherwise>false</xsl:otherwise>
+							</xsl:choose>
+						</xsl:attribute>
 						<xsl:element name="Portamento">
 							<xsl:attribute name="active">
 								<xsl:choose>
@@ -158,7 +166,7 @@
 							</xsl:attribute>
 							<Mod source="CC 68 - Legato On/Off" threshold="0,500000"/>
 						</xsl:element>
-					</Voice>
+					</xsl:element>
 					<xsl:element name="EG1">
 						<xsl:attribute name="active">
 							<xsl:choose>
